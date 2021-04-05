@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soulful_Speech_Core.Entities
 {
-    class FriendRequest
+    public class FriendRequest
     {
         public string Id { get; set; }
         public string FromId { get; set; }

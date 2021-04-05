@@ -1,8 +1,234 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "Home Page";
 }
+@Styles.Render("~/Content/style.css")
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="Tab">
+    <button class="TabLink" href onclick="openTab(event, 'Rooms')" id="defaultOpen"><h3>Rooms</h3></button>
+    <button class="TabLink" onclick="openTab(event, 'Friends')"><h3>Friends</h3></button>
+    <button class="TabLink" onclick="openTab(event, 'Requests')"><h3>Requests</h3></button>
+    <button class="TabLink" onclick="openTab(event, 'Favorites')"><h3>Favorites</h3></button>
+    <button class="TabLink" onclick="openTab(event, 'BlackList')"><h3>BlackList</h3></button>
+    <button class="TabLink" onclick="openTab(event, 'AddFriend')"><h3>Add Friend</h3></button>
+    <button class="TabLink" onclick="openTab(event, 'SearchRoom')"><h3>Search room</h3></button>
+    <button class="TabLink" onclick="openTab(event, 'CreateRoom')"><h3>Create room</h3></button>
 </div>
+
+<div id="Rooms" class="TabContent CustomScrollbar">
+    @foreach (var userRoom in ViewBag.UserRooms)
+    {
+        <div class="TabItem centered">
+            <div class="TabItemInfo">
+                <div>
+                    <h4>@userRoom.Name</h4>
+                </div>
+                <h6>Theme: @userRoom.Theme</h6><br>
+            </div>
+            <div class="TabItemCustomDropdown">
+                <div class="dropdown" style="float:right;">
+                    <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#">Enter room</a>
+                        <a href="#">Delete room</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<div id="Friends" class="TabContent CustomScrollbar">
+    @foreach (var friend in ViewBag.UserFriends)
+    {
+        <div class="TabItem centered">
+            <h4 class="TabItemInfo">@friend.UserName</h4>
+            <div class="TabItemCustomDropdown">
+                <div class="dropdown" style="float:right;">
+                    <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#">Accept</a>
+                        <a href="#">Decline</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="Requests" class="TabContent CustomScrollbar">
+    @foreach (var request in ViewBag.UserRequests)
+    {
+        <div class="TabItem centered">
+            <h4 class="TabItemInfo">@request.UserName</h4>
+            <div class="TabItemCustomDropdown">
+                <div class="dropdown" style="float:right;">
+                    <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#">Accept</a>
+                        <a href="#">Decline</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<div id="Favorites" class="TabContent CustomScrollbar">
+    @foreach (var favoriteFriend in ViewBag.UserFavoriteFriends)
+    {
+        <div class="TabItem centered">
+            <h4 class="TabItemInfo">@favoriteFriend.UserName</h4>
+            <div class="TabItemCustomDropdown">
+                <div class="dropdown" style="float:right;">
+                    <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#">Accept</a>
+                        <a href="#">Decline</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="BlackList" class="TabContent CustomScrollbar">
+    @foreach (var blackListFriend in ViewBag.UserBlackLiserFriends)
+    {
+        <div class="TabItem centered">
+            <h4 class="TabItemInfo">@blackListFriend.UserName</h4>
+            <div class="TabItemCustomDropdown">
+                <div class="dropdown" style="float:right;">
+                    <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#">Accept</a>
+                        <a href="#">Decline</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="AddFriend" class="TabContent CustomScrollbar">
+    <div class="TabItem TabItemForm centered">
+        <form action="" class="TabForm">
+            <div class="TabFormItem">
+                <label for="">Enter username</label>
+            </div>
+            <div class="TabFormItem">
+                <input type="text">
+            </div>
+            <div class="TabFormItem">
+                <input type="Submit" value="Send request">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="SearchRoom" class="TabContent CustomScrollbar">
+    <div class="TabItem TabItemForm centered">
+        <form action="" class="TabForm">
+            <div class="TabFormItem">
+                <label for="">Enter room name</label>
+            </div>
+            <div class="TabFormItem">
+                <input type="text">
+            </div>
+            <div class="TabFormItem">
+                <input type="Submit" value="Find room">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="CreateRoom" class="TabContent CustomScrollbar">
+    <div class="TabItem TabItemForm ExtandedTabItemForm centered">
+        <form action="" class="TabForm">
+            <div class="TabFormItem">
+                <label for="">Enter room name</label>
+            </div>
+            <div class="TabFormItem">
+                <input type="text">
+            </div>
+            <div class="TabFormItem">
+                <label for="">Еnter tags separated by commas</label>
+            </div>
+            <div class="TabFormItem">
+                <input type="text">
+            </div>
+            <div class="TabFormItem">
+                <input type="Submit" value="Create room">
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div class="Chat">
+    <div class="ChatHeader">
+        <h5>Room 1</h5>
+        <p>5 members</p>
+    </div>
+    <div class="MessageMonitor">
+
+        <div class="Message">
+
+            <div>
+                <p class="Sender">User1</p>
+                Lorem ipsum dolor sit,
+                amet consectetur adipisicing elit.
+                Commodi autem id odit soluta corporis
+                beatae ipsa delectus illum ducimus
+                distinctio quos, aut obcaecati,
+                vitae et, accusamus perspiciatis
+                eos iste voluptatem?
+                <b class="Indentation"></b>
+                <p class="MessageTime">21:30</p>
+            </div>
+        </div>
+        <div class="Message">
+            <div>
+                Lorem ipsum dolor sit,
+                ameaut obcaecati,
+                vitaes perspiciatis
+                eos iste voluptatem?
+                <b class="Indentation"></b>
+                <p class="MessageTime">21:30</p>
+            </div>
+
+        </div>
+        <div class="Message">
+
+            <div>
+                <p class="Sender">User2</p>
+                Lorem ipsum dolor sit,
+                ameaut obcaecati,
+                vitaes perspiciatis
+                eos iste voluptatem?
+                <b class="Indentation"></b>
+                <p class="MessageTime">21:30</p>
+            </div>
+
+        </div>
+        <div class="Message">
+            <div>
+                Lorem
+                <b class="Indentation"></b>
+                <p class="MessageTime">21:30</p>
+            </div>
+        </div>
+    </div>
+    <div class="ContextBlock">
+        <form action="" class="MassageBoxForm">
+            <textarea rows="1" placeholder="Write a message..." class="MessageBox"></textarea>
+            <input type="submit" class="MassageSenderButton" value="Send">
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/tabs.js")
+}

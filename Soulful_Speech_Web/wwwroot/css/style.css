@@ -1,0 +1,451 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+html {
+    padding: 0;
+    margin: 0;
+    background-color: #161a1f;
+}
+
+body, html {
+    height: 96.2%;
+    background-color: #161a1f !important;
+    ;
+}
+
+
+* a {
+    text-decoration: none !important;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+
+
+/* *, ::after, ::before {
+    box-sizing: unset !important; 
+}*/
+
+.navbar {
+    height: 8%;
+    background-color: #06070d;
+    border-bottom: 2px solid #00e59b;
+    font-size: 1vw;
+    flex-wrap: unset !important;
+}
+
+    .navbar .form-inline > a {
+        color: #a1a5ad;
+        transition: 0.3;
+    }
+
+        .navbar .form-inline > a:hover {
+            color: #fff;
+        }
+
+.navbar-toggler {
+    font-size: 0.9vw !important;
+    padding: 0.5% 0.5% 0.5% 0.5% !important;
+}
+
+.navbar-brand {
+    font-size: 1.5vw !important;
+}
+
+.UserInfo {
+    margin-top: 6px;
+    margin-right: 14px;
+    color: #a1a5ad;
+    font-size: 1vw;
+}
+
+.Tab {
+    display: flex;
+    flex-direction: column;
+    background-color: inherit;
+    width: 20%;
+    color: #a1a5ad;
+    float: left;
+    /*Change tabs hight here*/
+    height: 50%;
+    min-height: 50%;
+    -webkit-box-shadow: 10px 10px 28px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 28px -4px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 28px -4px rgba(0,0,0,0.75);
+}
+
+
+.TabLink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.Tab button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(7, 242, 134);
+    background-color: #161a1f;
+    color: #a1a5ad;
+    /* height: 5.655vmax;*/
+    transition: 0.3s;
+    -webkit-box-shadow: inset -1px -4px 67px -26px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset -1px -4px 67px -26px rgba(0,0,0,0.75);
+    box-shadow: inset -1px -4px 67px -26px rgba(0,0,0,0.75);
+    border-right: 1px solid #111;
+}
+
+    .Tab button:hover {
+        background-color: #0e131a;
+        outline: none;
+    }
+
+    .Tab button.active {
+        background-color: #111;
+        color: white;
+        outline: none;
+    }
+
+.TabContent {
+    width: 25%;
+    float: left;
+    background-color: #323d4e65;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    flex: 1;
+    -webkit-box-shadow: inset -8px -15px 67px -26px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset -8px -15px 67px -26px rgba(0,0,0,0.75);
+    box-shadow: inset -8px -15px 67px -26px rgba(0,0,0,0.75);
+    scrollbar-width: thin;
+    border-right: 2px solid #00e59b;
+}
+
+.Tab button > h3 {
+    font-size: 1.3vw;
+}
+
+.TabContent h4, h6 {
+    margin: 0px;
+}
+
+.TabContent h6 {
+    font-size: 0.5vw;
+}
+
+.TabContent h4 {
+    font-size: 1vw;
+}
+
+.TabContent:nth-child(-n + 16) {
+    flex: 1;
+}
+
+.TabItem {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    /*height: 2.8275vmax;*/
+    height: 6.25%;
+    color: #a1a5ad;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(7, 242, 134);
+    -webkit-box-shadow: inset -1px -4px 67px -26px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset -1px -4px 67px -26px rgba(0,0,0,0.75);
+    box-shadow: inset -1px -4px 67px -26px rgba(0,0,0,0.75);
+}
+
+    .TabItem:hover {
+        background-color: #3d4b5f65;
+        color: white;
+    }
+
+
+
+.centered {
+    text-align: center;
+}
+
+.TabItemInfo {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 3%;
+    padding-left: 3%;
+}
+
+.TabItemCustomDropdown {
+    display: flex;
+    width: 10%;
+    flex: 1;
+    border-left: 2px solid black;
+    height: 100%;
+}
+
+.dropbtn {
+    font-size: 1vw;
+    background-color: inherit;
+    color: #a1a5ad;
+    width: 100%;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    color: #a1a5ad;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #161a1f;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        outline: none;
+        color: #a1a5ad;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        border: 2px solid #161a1f;
+        border-right: none;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #161a1f;
+            color: #fff;
+            border: 2px solid rgb(7, 242, 134);
+            border-right: none;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #161a1f;
+    color: #fff;
+}
+
+.CustomScrollbar {
+    /* scrollbar-color: linear-gradient(255deg, rgba(0, 255, 119, 0.4), rgb(49, 151, 239, 0.4)) #fff;*/
+    scrollbar-width: thin;
+}
+
+    .CustomScrollbar::-webkit-scrollbar {
+        width: 1.5%;
+        height: 3px;
+    }
+
+    .CustomScrollbar::-webkit-scrollbar-track {
+        background: #fff;
+    }
+
+    .CustomScrollbar::-webkit-scrollbar-thumb {
+        height: 50px;
+        background: linear-gradient(255deg, rgba(0, 255, 119, 0.4), rgb(49, 151, 239, 0.4));
+        border-radius: 3px;
+    }
+
+.TabItemForm {
+    height: 25%;
+    background-color: #323d4e65;
+    flex-direction: column;
+}
+
+.ExtandedTabItemForm {
+    height: 37.5%;
+    flex-direction: column;
+}
+
+.TabItemForm:hover {
+    background-color: #323d4e65;
+    color: #a1a5ad;
+    cursor: default;
+}
+
+.TabForm {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+    .TabForm label {
+        margin: 0;
+        padding: 0;
+    }
+
+    .TabForm input[type=text] {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        border: 1px solid #BEBEBE;
+        -webkit-transition: all 0.10s ease-in-out;
+        -moz-transition: all 0.10s ease-in-out;
+        -ms-transition: all 0.10s ease-in-out;
+        -o-transition: all 0.10s ease-in-out;
+        outline: none;
+        resize: vertical;
+        width: 100%;
+    }
+
+        .TabForm input[type=text]:focus {
+            -moz-box-shadow: 0 0 8px #00e59b;
+            -webkit-box-shadow: 0 0 8px #00e59b;
+            box-shadow: 0 0 8px #00e59b;
+            border: 1px solid #00e59b;
+        }
+
+    .TabForm input[type=submit] {
+        color: rgb(177, 175, 175);
+        background-color: inherit;
+        padding: 4px 10px 4px 10px;
+        border: none;
+        font-size: 14px;
+        border: 2px solid #00e59b;
+        transition: 0.3s;
+        width: 100%;
+    }
+
+        .TabForm input[type=submit]:hover {
+            background-color: #38445765;
+            color: #fff;
+        }
+
+.TabFormItem {
+    display: flex;
+    width: 100%;
+    padding: 5px 15px;
+}
+
+
+
+.Chat {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    color: #a1a5ad;
+    float: left;
+    height: 100%;
+    min-height: 100%;
+    flex: 1;
+    -webkit-box-shadow: 10px 10px 28px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 28px -4px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 28px -4px rgba(0,0,0,0.75);
+}
+
+.ChatHeader {
+    height: 8%;
+    background-color: #323d4e65;
+    border: 1px solid #06070d;
+}
+
+    .ChatHeader p,
+    .ChatHeader h5 {
+        margin: 0px;
+        padding: 0px;
+        padding-left: 12px;
+        font-size: 1.2vw;
+    }
+
+    .ChatHeader h5 {
+        padding-top: 1px;
+        color: rgb(240, 240, 240);
+    }
+
+.MessageMonitor {
+    height: 84%;
+    overflow-y: scroll;
+}
+
+.Message {
+    max-width: 60%;
+    width: auto;
+    color: rgb(240, 240, 240);
+    margin-top: 5px;
+    margin-left: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.7vw;
+    display: block;
+}
+
+    .Message div {
+        display: inline-block;
+        background-color: #576b8865;
+        border-radius: 4px 4px 4px 4px;
+        padding: 5px;
+        margin: 0px;
+    }
+
+.Sender {
+    margin: 0px;
+    color: rgb(7, 242, 134);
+    font-size: 0.9vw;
+}
+
+.MessageTime {
+    color: #999;
+    margin: 0px;
+    margin-left: 4px;
+    text-align: right;
+}
+
+/*Change*/
+.Indentation {
+    margin-left: 35px;
+}
+
+.ContextBlock {
+    height: 8%;
+    background-color: #323d4e65;
+    border: 1px solid #06070d;
+    padding: 1.5%;
+}
+
+.MessageBox {
+    width: 90%;
+    background-color: inherit;
+    outline: none;
+    color: #fff;
+    resize: none;
+    border: none;
+    font-size: 0.8vw;
+    padding: 0.3% 1% 0.3% 1%;
+}
+
+.MassageBoxForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.MassageSenderButton {
+    color: rgb(177, 175, 175);
+    background-color: inherit;
+    padding: 0.3% 3% 0.3% 3%;
+    border: none;
+    font-size: 0.8vw;
+    border: 2px solid #00e59b;
+    transition: 0.3s;
+}
+
+    .MassageSenderButton:hover {
+        background-color: #38445765;
+        color: #fff;
+    }

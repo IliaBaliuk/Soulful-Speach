@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soulful_Speech_Core.Entities
 {
-    class Role : IdentityRole
+    public class Role : IdentityRole
     {
     }
 }

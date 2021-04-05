@@ -8,8 +8,4 @@
     <ProjectReference Include="..\Soulful_Speech_Core\Soulful_Speech_Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EF\Repositories\" />
-  </ItemGroup>
-
 </Project>

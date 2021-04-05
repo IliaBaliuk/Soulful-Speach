@@ -9,8 +9,6 @@ namespace Soulful_Speech_Core.Entities
 {
     public class User : IdentityUser
     {
-        public string Gender { get; set; }
-
         public List<FriendRequest> ToFriendRequests { get; set; }
         public List<FriendRequest> FromFriendRequests { get; set; }
         public List<Friend> Friends { get; set; }

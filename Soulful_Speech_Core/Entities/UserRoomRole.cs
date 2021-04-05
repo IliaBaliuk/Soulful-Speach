@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soulful_Speech_Core.Entities
 {
-    class UserRoomRole
+    public class UserRoomRole
     {
         public string Id { get; set; }
         public string Name { get; set; }

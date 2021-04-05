@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soulful_Speech_Core.Entities
 {
-    class TagInRoom
+    public class TagInRoom
     {
         public string Id { get; set; }
         public string TagId { get; set; }
