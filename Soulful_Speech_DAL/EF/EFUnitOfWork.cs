@@ -1,4 +1,8 @@
 ﻿using Soulful_Speech_Core.Entities;
+using Soulful_Speech_Core.Interfaces;
+using Soulful_Speech_DAL.EF.Repository;
+using Soulful_Speech_DAL.Interfaces;
+using Soulful_Speech_DAL.Interfaces.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,125 +11,121 @@ using System.Threading.Tasks;
 
 namespace Soulful_Speech_DAL.EF
 {
-    public class UnitOfWork : IDisposable
+    public class EFUnitOfWork : IUnitOfWork
     {
         private SSContext db = new SSContext();
 
-        private Repository<User> userRepository;
-        private Repository<Friend> friendRepository;
-        private Repository<FriendRequest> friendRequestRepository;
-        private Repository<Message> messageRepository;
-        private Repository<PersonalMessage> personalMessageRepository;
-        private Repository<Role> roleRepository;
-        private Repository<Room> roomRepository;
-        private Repository<Tag> tagRepository;
-        private Repository<TagInRoom> tagInRoomRepository;
-        private Repository<UserRoom> userRoomRepository;
-        private Repository<UserRoomRole> userRoomRoleRepository;
+        private IUserRepository userRepository;
+        private IFriendRepository friendRepository;
+        private IFriendRequestRepository friendRequestRepository;
+        private IMessageRepository messageRepository;
+        private IPersonalMessageRepository personalMessageRepository;
+        private IRoleRepository roleRepository;
+        private IRoomRepository roomRepository;
+        private ITagRepository tagRepository;
+        private ITagInRoomRepository tagInRoomRepository;
+        private IUserRoomRepository userRoomRepository;
+        private IUserRoomRoleRepository userRoomRoleRepository;
 
-        public Repository<User> Users
+        public IUserRepository Users
         {
             get
             {
                 if (userRepository == null)
-                    userRepository = new Repository<User>(db);
+                    userRepository = new EFUserRepository(db);
                 return userRepository;
             }
         }
-        public Repository<Friend> Friends
+        public IFriendRepository Friends
         {
             get
             {
                 if (friendRepository == null)
-                    friendRepository = new Repository<Friend>(db);
+                    friendRepository = new EFFriendRepository(db);
                 return friendRepository;
             }
         }
-        public Repository<FriendRequest> FriendRequests
+        public IFriendRequestRepository FriendRequests
         {
             get
             {
                 if (friendRequestRepository == null)
-                    friendRequestRepository = new Repository<FriendRequest>(db);
+                    friendRequestRepository = new EFFriendRequestRepository(db);
                 return friendRequestRepository;
             }
         }
-        public Repository<Message> Messages
+        public IMessageRepository Messages
         {
             get
             {
                 if (messageRepository == null)
-                    messageRepository = new Repository<Message>(db);
+                    messageRepository = new EFMessageRepository(db);
                 return messageRepository;
             }
         }
-        public Repository<PersonalMessage> PersonalMessages
+        public IPersonalMessageRepository PersonalMessages
         {
             get
             {
                 if (personalMessageRepository == null)
-                    personalMessageRepository = new Repository<PersonalMessage>(db);
+                    personalMessageRepository = new EFPersonalMessageRepository(db);
                 return personalMessageRepository;
             }
         }
-        public Repository<Role> Roles
+        public IRoleRepository Roles
         {
             get
             {
                 if (roleRepository == null)
-                    roleRepository = new Repository<Role>(db);
+                    roleRepository = new EFRoleRepository(db);
                 return roleRepository;
             }
         }
-        public Repository<Room> Rooms
+        public IRoomRepository Rooms
         {
             get
             {
                 if (roomRepository == null)
-                    roomRepository = new Repository<Room>(db);
+                    roomRepository = new EFRoomRepository(db);
                 return roomRepository;
             }
         }
-        public Repository<Tag> Tags
+        public ITagRepository Tags
         {
             get
             {
                 if (tagRepository == null)
-                    tagRepository = new Repository<Tag>(db);
+                    tagRepository = new EFTagRepository(db);
                 return tagRepository;
             }
         }
-
-        public Repository<TagInRoom> TagsInRoom
+        public ITagInRoomRepository TagsInRoom
         {
             get
             {
                 if (tagInRoomRepository == null)
-                    tagInRoomRepository = new Repository<TagInRoom>(db);
+                    tagInRoomRepository = new EFTagInRoomRepository(db);
                 return tagInRoomRepository;
             }
         }
-
-        public Repository<UserRoom> UserRooms
+        public IUserRoomRepository UserRooms
         {
             get
             {
                 if (userRoomRepository == null)
-                    userRoomRepository = new Repository<UserRoom>(db);
+                    userRoomRepository = new EFUserRoomRepository(db);
                 return userRoomRepository;
             }
         }
-
-        public Repository<UserRoomRole> UserRoomRoles
+        public IUserRoomRoleRepository UserRoomRoles
         {
             get
             {
                 if (userRoomRoleRepository == null)
-                    userRoomRoleRepository = new Repository<UserRoomRole>(db);
+                    userRoomRoleRepository = new EFUserRoomRoleRepository(db);
                 return userRoomRoleRepository;
             }
         }
-
 
         public void Save()
         {
@@ -133,7 +133,6 @@ namespace Soulful_Speech_DAL.EF
         }
 
         private bool disposed = false;
-
         public virtual void Dispose(bool disposing)
         {
             if (!this.disposed)

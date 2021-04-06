@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Soulful_Speech_DAL.EF
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public abstract class EFRepository<T> : IRepository<T> where T: class
     {
         private readonly SSContext context;
 
-        public Repository(SSContext context)
+        public EFRepository(SSContext context)
         {
             this.context = context;
         }

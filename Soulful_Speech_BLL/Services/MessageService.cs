@@ -1,6 +1,7 @@
 ﻿using Soulful_Speech_BLL.Interfaces;
 using Soulful_Speech_Core.Entities;
 using Soulful_Speech_DAL.EF;
+using Soulful_Speech_DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace Soulful_Speech_BLL.Services
 {
     public class MessageService
     {
-        private UnitOfWork context;
+        private IUnitOfWork context;
 
-        public MessageService(UnitOfWork context)
+        public MessageService(IUnitOfWork context)
         {
             this.context = context;
         }

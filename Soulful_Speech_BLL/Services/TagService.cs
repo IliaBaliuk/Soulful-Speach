@@ -1,4 +1,5 @@
 ﻿using Soulful_Speech_DAL.EF;
+using Soulful_Speech_DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace Soulful_Speech_BLL.Services
 {
     public class TagService
     {
-        UnitOfWork context;
+        IUnitOfWork context;
 
-        public TagService(UnitOfWork context)
+        public TagService(IUnitOfWork context)
         {
             this.context = context;
         }
