@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Soulful_Speech_DAL.Interfaces;
 using Soulful_Speech_DAL.EF;
 using Soulful_Speech_Core.Interfaces;
+using Soulful_Speech_BLL.Services;
 
 namespace Soulful_Speech_Web
 {
@@ -31,7 +32,7 @@ namespace Soulful_Speech_Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SSContext>(options =>
-                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SSContext>();
@@ -39,7 +40,10 @@ namespace Soulful_Speech_Web
             services.AddControllersWithViews();
 
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
-            services.AddTransient(typeof(IRepository<>),typeof(EFRepository<>));
+            services.AddTransient<SSContext, SSContext>();
+            services.AddTransient<UserService, UserService>();
+            services.AddTransient<UserManager<User>, UserManager<User>>();
+            services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));
 
         }
 

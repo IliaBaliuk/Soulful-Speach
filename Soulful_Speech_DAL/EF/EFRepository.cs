@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Soulful_Speech_DAL.EF
 {
-    public abstract class EFRepository<T> : IRepository<T> where T : class
+    public class EFRepository<T> : IRepository<T> where T : class
     {
         private readonly SSContext context;
 

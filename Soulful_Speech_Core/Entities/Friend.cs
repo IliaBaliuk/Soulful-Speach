@@ -8,6 +8,7 @@ namespace Soulful_Speech_Core.Entities
 {
     public class Friend
     {
+        public string Id { get; set; }
         public string UserMainId { get; set; }
         public string UserSubId { get; set; }
         public User UserMain { get; set; }
