@@ -1,5 +1,4 @@
-﻿using Soulful_Speech_BLL.Interfaces;
-using Soulful_Speech_Core.Entities;
+﻿using Soulful_Speech_Core.Entities;
 using Soulful_Speech_DAL.EF;
 using Soulful_Speech_DAL.Interfaces;
 using System;

@@ -4,4 +4,14 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Soulful_Speech_BLL\Soulful_Speech_BLL.csproj" />
+    <ProjectReference Include="..\Soulful_Speech_Core\Soulful_Speech_Core.csproj" />
+    <ProjectReference Include="..\Soulful_Speech_DAL\Soulful_Speech_DAL.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -11,7 +11,7 @@ namespace Soulful_Speech_BLL.Services
 {
     public class UserService
     {
-        IUnitOfWork context;
+        private IUnitOfWork context;
 
         public UserService(IUnitOfWork context)
         {

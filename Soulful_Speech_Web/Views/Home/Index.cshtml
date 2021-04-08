@@ -1,8 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-@Styles.Render("~/Content/style.css")
 
+<link href="~/css/style.css" rel="stylesheet" />
 
 <div class="Tab">
     <button class="TabLink" href onclick="openTab(event, 'Rooms')" id="defaultOpen"><h3>Rooms</h3></button>
@@ -229,6 +229,4 @@
     </div>
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/Scripts/tabs.js")
-}
+<script src="~/js/tabs.js"></script>

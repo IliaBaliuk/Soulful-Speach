@@ -13,7 +13,12 @@ namespace Soulful_Speech_DAL.EF
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-        private SSContext db = new SSContext();
+        private SSContext db;
+
+        public EFUnitOfWork(SSContext context)
+        {
+            db = context;
+        }
 
         private IUserRepository userRepository;
         private IFriendRepository friendRepository;

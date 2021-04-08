@@ -1,13 +1,20 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Soulful_Speech_Core.Entities;
+using Soulful_Speech_DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Soulful_Speech_DAL.Interfaces;
+using Soulful_Speech_DAL.EF;
+using Soulful_Speech_Core.Interfaces;
 
 namespace Soulful_Speech_Web
 {
@@ -23,7 +30,17 @@ namespace Soulful_Speech_Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<SSContext>(options =>
+                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<SSContext>();
+
             services.AddControllersWithViews();
+
+            services.AddTransient<IUnitOfWork, EFUnitOfWork>();
+            services.AddTransient(typeof(IRepository<>),typeof(EFRepository<>));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +61,7 @@ namespace Soulful_Speech_Web
 
             app.UseRouting();
 
+            app.UseAuthentication();   //!!
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
