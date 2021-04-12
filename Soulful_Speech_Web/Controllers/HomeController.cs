@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Soulful_Speech_BLL.Services;
@@ -25,11 +26,11 @@ namespace Soulful_Speech_Web.Controllers
             this.UserManager = userManager;
             _logger = logger;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             var user = UserManager.FindByNameAsync(User.Identity.Name);
-            ViewBag.CurrentUser = user;
+            ViewBag.CurrentUser = user.Result;
             ViewBag.UserRooms = UserService.GetRoomList(user.Result);
             ViewBag.UserFriends = UserService.GetFriendList(user.Result);
             ViewBag.UserRequests = UserService.GetFriendRequestList(user.Result);

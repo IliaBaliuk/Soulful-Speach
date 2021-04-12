@@ -42,7 +42,10 @@ namespace Soulful_Speech_Web
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
             services.AddTransient<SSContext, SSContext>();
             services.AddTransient<UserService, UserService>();
+            services.AddTransient<RoomService, RoomService>();
+            services.AddTransient<MessageService, MessageService>(); 
             services.AddTransient<UserManager<User>, UserManager<User>>();
+            services.AddTransient<SignInManager<User>, SignInManager<User>>();
             services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));
 
         }

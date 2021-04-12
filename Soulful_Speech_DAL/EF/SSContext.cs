@@ -34,9 +34,11 @@ namespace Soulful_Speech_DAL
             //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
             modelBuilder.Entity<User>().HasKey(u => u.Id);
+            modelBuilder.Entity<IdentityUserRole<string>>().HasKey(iur => new { iur.RoleId, iur.UserId });
+
+            //modelBuilder.Ignore<IdentityUserRole<string>>();
             modelBuilder.Ignore<IdentityUserLogin<string>>();
-            modelBuilder.Ignore<IdentityUserRole<string>>();
-            modelBuilder.Ignore<IdentityUserClaim<string>>();
+           // modelBuilder.Ignore<IdentityUserClaim<string>>();
             modelBuilder.Ignore<IdentityUserToken<string>>();
             modelBuilder.Ignore<IdentityUser<string>>();
 
