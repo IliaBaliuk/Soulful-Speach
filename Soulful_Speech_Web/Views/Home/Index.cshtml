@@ -4,6 +4,9 @@
 
 <link href="~/css/style.css" rel="stylesheet" />
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
 <div class="Tab">
     <button class="TabLink" href onclick="openTab(event, 'Rooms')" id="defaultOpen"><h3>Rooms</h3></button>
     <button class="TabLink" onclick="openTab(event, 'Friends')"><h3>Friends</h3></button>
@@ -18,12 +21,11 @@
 <div id="Rooms" class="TabContent CustomScrollbar">
     @foreach (var userRoom in ViewBag.UserRooms)
     {
-        <div class="TabItem centered">
+        <div id=@userRoom.Id class="TabItem centered">
             <div class="TabItemInfo">
                 <div>
                     <h4>@userRoom.Name</h4>
                 </div>
-                <h6>Theme: @userRoom.Theme</h6><br>
             </div>
             <div class="TabItemCustomDropdown">
                 <div class="dropdown" style="float:right;">
@@ -130,34 +132,42 @@
 
 <div id="SearchRoom" class="TabContent CustomScrollbar">
     <div class="TabItem TabItemForm centered">
-        <form action="" class="TabForm">
+        <form action="" class="TabForm" id="SearchRoomForm">
             <div class="TabFormItem">
                 <label for="">Enter room name</label>
             </div>
             <div class="TabFormItem">
-                <input type="text">
+                <input id="DesiredRoomName" name="Name" type="text">
             </div>
             <div class="TabFormItem">
-                <input type="Submit" value="Find room">
+                <label for="">Enter tags</label>
+            </div>
+            <div class="TabFormItem">
+                <input id="DesiredRoomTags" name="Tags" type="text">
             </div>
         </form>
     </div>
+    <div id="FoundRoomsResult">
+
+    </div>
 </div>
+
+
 
 <div id="CreateRoom" class="TabContent CustomScrollbar">
     <div class="TabItem TabItemForm ExtandedTabItemForm centered">
-        <form action="" class="TabForm">
+        <form class="TabForm" method="post" asp-controller="Home" asp-action="CreateRoom">
             <div class="TabFormItem">
                 <label for="">Enter room name</label>
             </div>
             <div class="TabFormItem">
-                <input type="text">
+                <input type="text" name="RoomName">
             </div>
             <div class="TabFormItem">
                 <label for="">Еnter tags separated by commas</label>
             </div>
             <div class="TabFormItem">
-                <input type="text">
+                <input type="text" name="Tags">
             </div>
             <div class="TabFormItem">
                 <input type="Submit" value="Create room">
@@ -167,7 +177,7 @@
     </div>
 </div>
 
-<div class="Chat">
+<div id="Chat" class="Chat">
     <div class="ChatHeader">
         <h5>Room 1</h5>
         <p>5 members</p>
@@ -229,4 +239,11 @@
     </div>
 </div>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+
+<script src="~/js/addRoom.js"></script>
+<script src="~/js/getFoundRooms.js"></script>
 <script src="~/js/tabs.js"></script>
+<script src="~/js/loadRoom.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

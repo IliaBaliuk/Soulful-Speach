@@ -22,11 +22,7 @@ namespace Soulful_Speech_BLL.Services
         {
             try
             {
-                context.Rooms.Insert(new Room()
-                {
-                    Name = room.Name,
-                    Theme = room.Theme,
-                });
+                context.Rooms.Insert(room);
                 foreach (var tag in tags)
                 {
 
@@ -44,7 +40,7 @@ namespace Soulful_Speech_BLL.Services
                 });
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }
@@ -66,6 +62,63 @@ namespace Soulful_Speech_BLL.Services
 
                 return false;
             }
+        }
+
+        public Role GetUserRoleByName(string name)
+        {
+            try
+            {
+                return context.Roles.GetList(r => r.Name == name).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public UserRoomRole GetUserRoomRoleByName(string name)
+        {
+            try
+            {
+                return context.UserRoomRoles.GetList(r => r.Name == name).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Room GetRoomdByName(string name)
+        {
+            try
+            {
+                return context.Rooms.GetList(r => r.Name == name).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public Room GetRoomById(string id)
+        {
+            try
+            {
+                return context.Rooms.GetById(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Message> GetRoomMessages(string roomId)
+        {
+            return context.Messages.GetList(m => m.RoomId == roomId).OrderBy(m => m.DateTime).ToList();
+        }
+
+        public List<User> GetRoomUsers(string roomId)
+        {
+            return context.Users.GetList(u => u.UserRooms.Where(ur => ur.RoomId == roomId).Any()).ToList();
         }
     }
 }

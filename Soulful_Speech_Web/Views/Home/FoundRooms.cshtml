@@ -1,0 +1,28 @@
+﻿
+<link href="~/css/style.css" rel="stylesheet" />
+@if (ViewBag.FoundRooms != null)
+{
+
+    @foreach (var room in ViewBag.FoundRooms)
+    {
+        <div class="TabItem centered FoundRoomTabItem" id=@room.Id>
+            <div class="TabItemInfo">
+                <div>
+                    <h4>@room.Name</h4>
+                </div>
+            </div>
+            <div class="TabItemCustomDropdown">
+                <div class="dropdown" style="float:right;">
+                    <button class="dropbtn"><i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#" id="AddRoomURL">Add room</a>
+                        <a href="#" id="EnterRoomURL">Enter room</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+   
+}
+<script src="~/js/getFoundRooms.js"></script>

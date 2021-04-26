@@ -39,18 +39,23 @@ namespace Soulful_Speech_Web
 
             services.AddControllersWithViews();
 
+            services.AddSignalR(hubOptions =>
+            {
+                hubOptions.EnableDetailedErrors = true;
+                hubOptions.KeepAliveInterval = System.TimeSpan.FromMinutes(1);
+            });
+
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
             services.AddTransient<SSContext, SSContext>();
-            services.AddTransient<UserService, UserService>();
+            services.AddScoped<UserService, UserService>();
             services.AddTransient<RoomService, RoomService>();
-            services.AddTransient<MessageService, MessageService>(); 
+            services.AddTransient<MessageService, MessageService>();
             services.AddTransient<UserManager<User>, UserManager<User>>();
             services.AddTransient<SignInManager<User>, SignInManager<User>>();
             services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -60,7 +65,6 @@ namespace Soulful_Speech_Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -68,14 +72,17 @@ namespace Soulful_Speech_Web
 
             app.UseRouting();
 
-            app.UseAuthentication();   //!!
+            app.UseAuthentication(); //
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/chat");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                
             });
         }
     }

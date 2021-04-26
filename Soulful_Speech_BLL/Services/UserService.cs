@@ -86,12 +86,18 @@ namespace Soulful_Speech_BLL.Services
 
         public IList<Friend> GetFavoriteFriendList(User user)
         {
+            Message msg = new Message();
             return context.Friends.GetList(u => u.UserMainId == user.Id && u.IsSelect == true);
         }
 
         public IList<Friend> GetBlackFriendList(User user)
         {
             return context.Friends.GetList(u => u.UserMainId == user.Id && u.IsIgnore == true);
+        }
+
+        public IList<Room> SearchRoom(string userId,string name, List<Tag> tags)
+        {
+            return context.Rooms.GetList(r => r.TagsInRoom.Where(tir => tags.Contains(tir.Tag) || r.Name == name).Any() && !r.UserRooms.Where(u => u.UserId== userId).Any()).ToList();
         }
     }
 }

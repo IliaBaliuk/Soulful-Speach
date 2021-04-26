@@ -15,7 +15,7 @@ namespace Soulful_Speech_DAL
     {
         public SSContext(DbContextOptions<SSContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.EnsureCreated();        
         }
         //public DbSet<User> Users { get; set; }
         public DbSet<Friend> Friends { get; set; }
@@ -68,6 +68,28 @@ namespace Soulful_Speech_DAL
                 .HasOne(pm => pm.To)
                 .WithMany(u => u.ToPersonalMessages)
                 .HasForeignKey(p => p.ToId);
+
+            modelBuilder.Entity<Role>().HasData(new Role() 
+            {
+                Id = "1",
+                Name = "Admin"                
+            },
+            new Role()
+            {
+                Id = "2",
+                Name = "User"
+            });
+
+            modelBuilder.Entity<UserRoomRole>().HasData(new UserRoomRole()
+            {
+                Id = "1",
+                Name = "Admin"
+            },
+            new UserRoomRole()
+            {
+                Id = "2",
+                Name = "User"
+            });
 
 
             //modelBuilder.Entity<FriendRequest>()

@@ -36,14 +36,14 @@ namespace Soulful_Speech_BLL.Services
             }
         }
 
-        public bool SendRoomMessage(User user, Room room, string text)
+        public bool SendRoomMessage(User user, string roomId, string text)
         {
             try
             {
                 context.Messages.Insert(new Message()
                 {
                     UserId = user.Id,
-                    RoomId = room.Id,
+                    RoomId = roomId,
                     MessageText = text,
                     DateTime = DateTime.Now
                 });
