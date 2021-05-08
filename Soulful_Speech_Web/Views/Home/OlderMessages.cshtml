@@ -1,0 +1,11 @@
+﻿@foreach (var message in ViewBag.RoomMessages)
+{
+    <div class="Message">
+        <div>
+            <p class="Sender">@message.User.UserName</p>
+            @message.MessageText
+            <b class="Indentation"></b>
+            <p class="MessageTime">@message.DateTime.ToString("dddd, dd MMMM yyyy H:mm")</p>
+        </div>
+    </div>
+}

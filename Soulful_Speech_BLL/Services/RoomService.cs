@@ -12,7 +12,6 @@ namespace Soulful_Speech_BLL.Services
     public class RoomService
     {
         IUnitOfWork context;
-
         public RoomService(IUnitOfWork context)
         {
             this.context = context;
@@ -22,13 +21,13 @@ namespace Soulful_Speech_BLL.Services
         {
             try
             {
-                context.Rooms.Insert(room);
+                context.Rooms.Insert(room);      
                 foreach (var tag in tags)
                 {
-
+                    context.Tags.Insert(tag);
                     context.TagsInRoom.Insert(new TagInRoom()
                     {
-                        Tag = tag,
+                        TagId = tag.Name,
                         RoomId = room.Id,
                     });
                 }
@@ -40,7 +39,7 @@ namespace Soulful_Speech_BLL.Services
                 });
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -111,14 +110,25 @@ namespace Soulful_Speech_BLL.Services
             }
         }
 
-        public List<Message> GetRoomMessages(string roomId)
+        public List<Message> GetRoomMessages(string roomId, int numberOfPostedMessages)
         {
-            return context.Messages.GetList(m => m.RoomId == roomId).OrderBy(m => m.DateTime).ToList();
+            return context.Messages.GetList(m => m.RoomId == roomId).Skip(numberOfPostedMessages).Take(30).OrderBy(m => m.DateTime).ToList();
         }
 
         public List<User> GetRoomUsers(string roomId)
         {
             return context.Users.GetList(u => u.UserRooms.Where(ur => ur.RoomId == roomId).Any()).ToList();
+
+        }
+
+        public bool IsUserAddedRoom(User user, string roomId)
+        {
+            var text = context.UserRooms.GetList(ur => ur.RoomId == roomId && ur.UserId == user.Id);
+            if (context.UserRooms.GetList(ur => ur.RoomId == roomId && ur.UserId == user.Id).Count != 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

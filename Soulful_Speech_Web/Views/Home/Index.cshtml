@@ -158,7 +158,7 @@
     <div class="TabItem TabItemForm ExtandedTabItemForm centered">
         <form class="TabForm" method="post" asp-controller="Home" asp-action="CreateRoom">
             <div class="TabFormItem">
-                <label for="">Enter room name</label>
+                <label for="RoomName">Enter room name</label>
             </div>
             <div class="TabFormItem">
                 <input type="text" name="RoomName">
@@ -178,72 +178,12 @@
 </div>
 
 <div id="Chat" class="Chat">
-    <div class="ChatHeader">
-        <h5>Room 1</h5>
-        <p>5 members</p>
-    </div>
-    <div class="MessageMonitor">
-
-        <div class="Message">
-
-            <div>
-                <p class="Sender">User1</p>
-                Lorem ipsum dolor sit,
-                amet consectetur adipisicing elit.
-                Commodi autem id odit soluta corporis
-                beatae ipsa delectus illum ducimus
-                distinctio quos, aut obcaecati,
-                vitae et, accusamus perspiciatis
-                eos iste voluptatem?
-                <b class="Indentation"></b>
-                <p class="MessageTime">21:30</p>
-            </div>
-        </div>
-        <div class="Message">
-            <div>
-                Lorem ipsum dolor sit,
-                ameaut obcaecati,
-                vitaes perspiciatis
-                eos iste voluptatem?
-                <b class="Indentation"></b>
-                <p class="MessageTime">21:30</p>
-            </div>
-
-        </div>
-        <div class="Message">
-
-            <div>
-                <p class="Sender">User2</p>
-                Lorem ipsum dolor sit,
-                ameaut obcaecati,
-                vitaes perspiciatis
-                eos iste voluptatem?
-                <b class="Indentation"></b>
-                <p class="MessageTime">21:30</p>
-            </div>
-
-        </div>
-        <div class="Message">
-            <div>
-                Lorem
-                <b class="Indentation"></b>
-                <p class="MessageTime">21:30</p>
-            </div>
-        </div>
-    </div>
-    <div class="ContextBlock">
-        <form action="" class="MassageBoxForm">
-            <textarea rows="1" placeholder="Write a message..." class="MessageBox"></textarea>
-            <input type="submit" class="MassageSenderButton" value="Send">
-        </form>
-    </div>
+    
 </div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
-
-<script src="~/js/addRoom.js"></script>
-<script src="~/js/getFoundRooms.js"></script>
+<script src="~/js/roomFunctions.js"></script>
 <script src="~/js/tabs.js"></script>
-<script src="~/js/loadRoom.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

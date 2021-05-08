@@ -90,7 +90,7 @@ namespace Soulful_Speech_Web.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("login", "Account");
         }
     }
 }

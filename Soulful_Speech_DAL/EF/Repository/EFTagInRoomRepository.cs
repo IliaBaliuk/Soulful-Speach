@@ -10,8 +10,8 @@ namespace Soulful_Speech_DAL.EF.Repository
 {
     public class EFTagInRoomRepository : EFRepository<TagInRoom>, ITagInRoomRepository
     {
-        public EFTagInRoomRepository(SSContext context):base(context)
-        {
-        }
+        public EFTagInRoomRepository(SSContext context) : base(context)
+        { }
     }
 }
+

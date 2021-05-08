@@ -16,6 +16,7 @@ using Soulful_Speech_DAL.Interfaces;
 using Soulful_Speech_DAL.EF;
 using Soulful_Speech_Core.Interfaces;
 using Soulful_Speech_BLL.Services;
+using Soulful_Speech_Web.Controllers;
 
 namespace Soulful_Speech_Web
 {
@@ -45,14 +46,16 @@ namespace Soulful_Speech_Web
                 hubOptions.KeepAliveInterval = System.TimeSpan.FromMinutes(1);
             });
 
-            services.AddTransient<IUnitOfWork, EFUnitOfWork>();
-            services.AddTransient<SSContext, SSContext>();
+            services.AddScoped<IUnitOfWork, EFUnitOfWork>();
+            services.AddScoped<SSContext, SSContext>();
             services.AddScoped<UserService, UserService>();
-            services.AddTransient<RoomService, RoomService>();
-            services.AddTransient<MessageService, MessageService>();
-            services.AddTransient<UserManager<User>, UserManager<User>>();
-            services.AddTransient<SignInManager<User>, SignInManager<User>>();
-            services.AddTransient(typeof(IRepository<>), typeof(EFRepository<>));
+            services.AddScoped<RoomService, RoomService>();
+            services.AddSingleton<ValueService, ValueService>();
+            services.AddScoped<MessageService, MessageService>();
+            services.AddScoped<UserManager<User>, UserManager<User>>();
+            services.AddScoped<SignInManager<User>, SignInManager<User>>();
+            services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
+
 
         }
 

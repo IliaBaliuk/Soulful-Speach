@@ -23,15 +23,20 @@ namespace Soulful_Speech_Web.Controllers
         public RoomService RoomService { get; set; }
         public MessageService MessageService { get; set; }
         public UserManager<User> UserManager { get; set; }
+        public ValueService ValueService { get; set; }
+
+        private int numberOfPostedMessages;
 
         public HomeController(ILogger<HomeController> logger,UserService userService, UserManager<User> userManager, RoomService roomService,
-            MessageService messageService)
+            MessageService messageService, ValueService valueService)
         {
             this.UserService = userService;
             this.RoomService = roomService;
             this.UserManager = userManager;
             this.MessageService = messageService;
+            this.ValueService = valueService;
             _logger = logger;
+            numberOfPostedMessages = 0;
         }
         [Authorize]
         public IActionResult Index()
@@ -50,19 +55,24 @@ namespace Soulful_Speech_Web.Controllers
         public IActionResult CreateRoom(CreateRoomViewModel model)
         {
             List<Tag> tags = new List<Tag>();
-            foreach (var tag in model.Tags.Trim().ToLower().Split(',').ToList())
+            if (model.Tags != null)
             {
-                tags.Add(new Tag()
+                foreach (var tag in model.Tags.Trim().ToLower().Split(',').ToList())
                 {
-                    Name = tag
-                });
+                    tags.Add(new Tag()
+                    {
+                        Name = tag
+                    });
+                }
             }
-            var user = UserManager.FindByNameAsync(User.Identity.Name);
+            
+            var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
             var room = new Room()
             {
                 Name = model.RoomName,
             };
-            RoomService.CreateRoom(user.Result, tags, room, RoomService.GetUserRoomRoleByName("Admin"));
+            var userRoomRole = RoomService.GetUserRoomRoleByName("Admin");
+            RoomService.CreateRoom(user, tags, room, userRoomRole);
             return Redirect("Index");
         }
         [HttpPost]
@@ -79,10 +89,22 @@ namespace Soulful_Speech_Web.Controllers
 
         public IActionResult OpenRoom(string roomId) 
         {
+            ValueService.NumberOfPostedMessages = 0;
             ViewBag.RoomUsers = RoomService.GetRoomUsers(roomId);
-            ViewBag.RoomMessages = RoomService.GetRoomMessages(roomId);
+            ViewBag.RoomMessages = RoomService.GetRoomMessages(roomId, ValueService.NumberOfPostedMessages);
             ViewBag.CurrentRoom = RoomService.GetRoomById(roomId);
+            ValueService.NumberOfPostedMessages += 30;
+
             return PartialView("ChatRoom");
+        }
+        public IActionResult GetMoreMessages(string roomId)
+        {
+            ViewBag.RoomUsers = RoomService.GetRoomUsers(roomId);
+            ViewBag.RoomMessages = RoomService.GetRoomMessages(roomId, ValueService.NumberOfPostedMessages);
+            ViewBag.CurrentRoom = RoomService.GetRoomById(roomId);
+            ValueService.NumberOfPostedMessages += 30;
+
+            return PartialView("OlderMessages");
         }
 
         public IActionResult GetFoundRooms(SearchRoomViewModel model)
@@ -109,10 +131,13 @@ namespace Soulful_Speech_Web.Controllers
         public MessageInfoViewModel SendMessage(string roomId, string message)
         {
             var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
-            if (MessageService.SendRoomMessage(user, roomId, message))
+            if (RoomService.IsUserAddedRoom(user,roomId))
             {
-                var date = DateTime.Now.ToString("dddd, dd MMMM yyyy H:mm");
-                return new MessageInfoViewModel() {DateTime = date,Message = message, UserName = user.UserName };
+                if (MessageService.SendRoomMessage(user, roomId, message))
+                {
+                    var date = DateTime.Now.ToString("dddd, dd MMMM yyyy H:mm");//!
+                    return new MessageInfoViewModel() { DateTime = date, Message = message, UserName = user.UserName };
+                }
             }
             return null;
         }
@@ -122,6 +147,8 @@ namespace Soulful_Speech_Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 
 }

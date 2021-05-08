@@ -11,7 +11,15 @@ namespace Soulful_Speech_DAL.EF.Repository
     public class EFTagRepository : EFRepository<Tag>, ITagRepository
     {
         public EFTagRepository(SSContext context):base(context)
+        {}
+
+        public override void Insert(Tag entity)
         {
+            if (GetById(entity.Name) == null)
+            {
+                context.Set<Tag>().Add(entity);
+                context.SaveChanges();
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Soulful_Speech_DAL.EF
 {
     public class EFRepository<T> : IRepository<T> where T : class
     {
-        private readonly SSContext context;
+        protected readonly SSContext context;
 
         public EFRepository(SSContext context)
         {
@@ -37,7 +37,7 @@ namespace Soulful_Speech_DAL.EF
             return context.Set<T>().Where(expression).ToList();
         }
 
-        public void Insert(T entity)
+        public virtual void Insert(T entity)
         {
             context.Set<T>().Add(entity);
             context.SaveChanges();
