@@ -89,20 +89,20 @@ namespace Soulful_Speech_Web.Controllers
 
         public IActionResult OpenRoom(string roomId) 
         {
-            ValueService.NumberOfPostedMessages = 0;
+            ValueService.NumberOfDisplayedMessages = 0;
             ViewBag.RoomUsers = RoomService.GetRoomUsers(roomId);
-            ViewBag.RoomMessages = RoomService.GetRoomMessages(roomId, ValueService.NumberOfPostedMessages);
+            ViewBag.RoomMessages = RoomService.GetRoomMessages(roomId, ValueService.NumberOfDisplayedMessages);
             ViewBag.CurrentRoom = RoomService.GetRoomById(roomId);
-            ValueService.NumberOfPostedMessages += 30;
+            ValueService.NumberOfDisplayedMessages += 30;
 
             return PartialView("ChatRoom");
         }
         public IActionResult GetMoreMessages(string roomId)
         {
             ViewBag.RoomUsers = RoomService.GetRoomUsers(roomId);
-            ViewBag.RoomMessages = RoomService.GetRoomMessages(roomId, ValueService.NumberOfPostedMessages);
+            ViewBag.RoomMessages = RoomService.GetRoomMessages(roomId, ValueService.NumberOfDisplayedMessages);
             ViewBag.CurrentRoom = RoomService.GetRoomById(roomId);
-            ValueService.NumberOfPostedMessages += 30;
+            ValueService.NumberOfDisplayedMessages += 30;
 
             return PartialView("OlderMessages");
         }

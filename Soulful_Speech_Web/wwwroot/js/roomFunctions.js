@@ -32,6 +32,7 @@ $(document).ready(function () {
 	hubConnection.on("Send", function (message, userName, dateTime) {
 		$(".MessageMonitor")
 			.append('<div class="Message"><div><p class="Sender">' + userName + '</p>' + message + '<b class="Indentation"></b><p class="MessageTime">' + dateTime + '</p></div></div>');
+		$('.MessageMonitor').scrollTop(10000);
 	});
 
 	$('#sendMessageForm').submit(function (e) {
@@ -49,7 +50,7 @@ $(document).ready(function () {
 			contentType: "application/json; charset=utf-8",
 			success: function (result) {	
 				hubConnection.invoke("Send", result.message, result.userName, result.dateTime);
-				$('.MessageMonitor').scrollTop(100000);
+				
 			},
 			error: function (error) {
 				alert("There was an error posting the data to the server: " + error.responseText);
@@ -88,15 +89,22 @@ $(document).ready(function () {
 
 				document.getElementById("FoundRoomsResult").innerHTML = result;
 
-				$('#AddRoomURL').bind('click', function (roomId) {
-					$.post("/Home/AddRoom", { roomId: $(this).closest('.FoundRoomTabItem').attr('id') });
+				$('.AddRoomURL').bind('click', function () {
+					$.post("/Home/AddRoom", {
+						roomId: $(this).prop("id"), function() {
+							location.reload();
+						}
+					});
+					
 					location.reload();
 				});
+				
 			},
 			error: function (error) {
 				alert("There was an error posting the data to the server: " + error.responseText);
 			}
 		});
+		
 	}
 
 	$(".MessageMonitor").scroll(function () {
@@ -105,7 +113,7 @@ $(document).ready(function () {
 			$.post("/Home/GetMoreMessages", { roomId: $this.prop('id') }, function (result) {
 				$(".MessageMonitor").prepend(result);
 				if (result != "") {
-					$('.MessageMonitor').scrollTop(100);
+					$('.MessageMonitor').scrollTop(150);
                 }
 				
 			});

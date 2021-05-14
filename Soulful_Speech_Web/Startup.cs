@@ -55,8 +55,6 @@ namespace Soulful_Speech_Web
             services.AddScoped<UserManager<User>, UserManager<User>>();
             services.AddScoped<SignInManager<User>, SignInManager<User>>();
             services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
-
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

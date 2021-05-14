@@ -29,12 +29,7 @@
         <input type="submit" value="Sign up" />
     </div>
 </form>
-
-@if (User.Identity.IsAuthenticated)
-{
-    <p>@User.Identity.Name</p>
-
-    <form method="post" asp-controller="Account" asp-action="Logout">
-        <input type="submit" value="Выход" />
-    </form>
-}
+<div>
+    <p>Have account?</p>
+    <a href="/Account/login">Sign in</a>
+</div>

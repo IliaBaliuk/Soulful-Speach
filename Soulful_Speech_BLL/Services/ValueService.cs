@@ -8,10 +8,10 @@ namespace Soulful_Speech_BLL.Services
 {
     public class ValueService
     {
-        public int NumberOfPostedMessages { get; set; }
+        public int NumberOfDisplayedMessages { get; set; }
         public ValueService()
         {
-            NumberOfPostedMessages = 0;
+            NumberOfDisplayedMessages = 0;
         }
     }
 }
